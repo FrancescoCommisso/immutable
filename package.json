@@ -9,7 +9,13 @@
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/immutable-network.bna",
     "pretest": "npm run lint",
     "lint": "eslint .",
-    "test": "nyc mocha -t 0 test/*.js && cucumber-js"
+    "test": "nyc mocha -t 0 test/*.js && cucumber-js",
+    "bna": "composer archive create -t dir -n . ",
+    "startAndCreate": "./startFabric.sh && ./createPeerAdminCard.sh",
+    "install": "composer network install --card PeerAdmin@hlfv1 --archiveFile immutable-network@0.0.1.bna",
+    "start": "composer network start --networkName immutable-network --networkVersion 0.0.1 --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv1 --file networkadmin.card",
+    "playground": "composer-playground",
+    "go": "npm run bna && npm run startAndCreate && npm run install && npm run start && npm run playground"
   },
   "keywords": [
     "composer",

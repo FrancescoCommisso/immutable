@@ -17,7 +17,7 @@
  */
 rule EverybodyCanReadEverything {
     description: "Allow all participants read access to all resources"
-    participant: "org.acme.immutable.SampleParticipant"
+    participant: "org.acme.immutable.User"
     operation: READ
     resource: "org.acme.immutable.*"
     action: ALLOW
@@ -25,17 +25,17 @@ rule EverybodyCanReadEverything {
 
 rule EverybodyCanSubmitTransactions {
     description: "Allow all participants to submit transactions"
-    participant: "org.acme.immutable.SampleParticipant"
+    participant: "org.acme.immutable.User"
     operation: CREATE
-    resource: "org.acme.immutable.SampleTransaction"
+    resource: "org.acme.immutable.MakePost"
     action: ALLOW
 }
 
 rule OwnerHasFullAccessToTheirAssets {
     description: "Allow all participants full access to their assets"
-    participant(p): "org.acme.immutable.SampleParticipant"
+    participant(p): "org.acme.immutable.User"
     operation: ALL
-    resource(r): "org.acme.immutable.SampleAsset"
+    resource(r): "org.acme.immutable.Post"
     condition: (r.owner.getIdentifier() === p.getIdentifier())
     action: ALLOW
 }
